@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.blogerRepository = void 0;
-const bloggers = [
+exports.blogerRepository = exports.bloggers = void 0;
+exports.bloggers = [
     { id: 0, name: "Parker", youtubeUrl: "https://www.youtube.com/" },
     { id: 1, name: "Smith", youtubeUrl: "https://www.youtube.com/" }
 ];
 exports.blogerRepository = {
     getAllBlogger() {
-        return bloggers;
+        return exports.bloggers;
     },
     getBloggerId(id) {
-        const curentBlogger = bloggers.find((element) => element.id === id);
+        const curentBlogger = exports.bloggers.find((element) => element.id === id);
         return curentBlogger;
     },
     addNewBlogger(name, youtubeUrl) {
@@ -19,11 +19,11 @@ exports.blogerRepository = {
             name: name,
             youtubeUrl: youtubeUrl
         };
-        bloggers.push(newBlogger);
+        exports.bloggers.push(newBlogger);
         return newBlogger;
     },
     updateBlogger(id, name, youtubeUrl) {
-        const curentBlogger = bloggers.find((element) => element.id === id);
+        const curentBlogger = exports.bloggers.find((element) => element.id === id);
         if (curentBlogger) {
             curentBlogger.name = name;
             curentBlogger.youtubeUrl = youtubeUrl;
@@ -32,11 +32,11 @@ exports.blogerRepository = {
         return false;
     },
     deleteBlogger(id) {
-        const deleteBlogger = bloggers.find((element) => element.id === id);
-        if (deleteBlogger) {
-            const deleteBlogger = posts[deleteBlogger];
-            bloggers.splice(curentPostIndex, 1);
-            return deletePost;
+        const deleteBloggerId = exports.bloggers.findIndex((element) => element.id === id);
+        if (deleteBloggerId + 1) {
+            const deleteBlogger = exports.bloggers[deleteBloggerId];
+            exports.bloggers.splice(deleteBloggerId, 1);
+            return exports.bloggers;
         }
     }
 };

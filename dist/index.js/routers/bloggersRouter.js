@@ -27,7 +27,8 @@ exports.bloggerRouter.post('/', postBloggerNameValidation, postBloggerYoutubeUrl
         ]
     });
 });
-exports.bloggerRouter.get('/:id', (req, res) => {
+const idBLoggerValidation = (0, express_validator_1.param)('id').isNumeric();
+exports.bloggerRouter.get('/:id', idBLoggerValidation, bloggersMiddleware_1.getBloggersMiddleware, (req, res) => {
     const id = +req.params.id;
     const currentBlogger = bloggers_repository_1.blogerRepository.getBloggerId(id);
     if (currentBlogger) {
@@ -39,11 +40,16 @@ exports.bloggerRouter.put('/:id', postBloggerNameValidation, postBloggerYoutubeU
     const id = +req.params.id;
     const currentUpdateBlogger = bloggers_repository_1.blogerRepository.updateBlogger(id, req.body.name, req.body.youtubeUrl);
     if (currentUpdateBlogger) {
-        return res.status(200).send(currentUpdateBlogger);
+        return res.status(204).send(currentUpdateBlogger);
     }
     res.status(404).send('Not Found');
 });
-exports.bloggerRouter.delete('/:id', (req, res) => {
-    const ;
+exports.bloggerRouter.delete('/:id', idBLoggerValidation, bloggersMiddleware_1.getBloggersMiddleware, (req, res) => {
+    const id = +req.params.id;
+    const deleteBlogger = bloggers_repository_1.blogerRepository.deleteBlogger(id);
+    if (deleteBlogger) {
+        return res.status(204).send('No Content');
+    }
+    res.status(404).send('Not Found');
 });
 //# sourceMappingURL=bloggersRouter.js.map

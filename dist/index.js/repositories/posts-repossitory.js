@@ -1,13 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postsRepository = void 0;
+const bloggers_repository_1 = require("./bloggers-repository");
 const posts = [
-    { id: 0, title: "фыафыафыфыа", shortDescription: "string", content: "string", bloggerId: 1, bloggerName: "string" },
-    { id: 1, title: "фыasdsadыафыфыа", shortDescription: "string", content: "string", bloggerId: 2, bloggerName: "string" }
+    { id: 0, title: "фыафыафыфыа", shortDescription: "string", content: "string", bloggerId: 0, bloggerName: "string" },
+    { id: 1, title: "фыasdsadыафыфыа", shortDescription: "string", content: "string", bloggerId: 1, bloggerName: "string" }
 ];
 exports.postsRepository = {
     addNewPost(title, shortDescription, content, bloggerId) {
-        if (title && shortDescription) {
+        const isBlogger = bloggers_repository_1.bloggers.findIndex((element) => element.id === bloggerId);
+        if (isBlogger + 1) {
             const newPost = {
                 id: +(Date.now()),
                 title: title,
@@ -19,16 +21,7 @@ exports.postsRepository = {
             posts.push(newPost);
             return newPost;
         }
-        else {
-            return {
-                "errorsMessages": [
-                    {
-                        "message": "string",
-                        "field": "string"
-                    }
-                ]
-            };
-        }
+        return false;
     },
     getAllPost() {
         return posts;

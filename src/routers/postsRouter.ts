@@ -23,18 +23,14 @@ postRouter.post('/',
     (req: Request, res: Response) => {
     const newPost = postsRepository.addNewPost( req.body.title, req.body.shortDescription, req.body.content, req.body.bloggerId)
     if(newPost){
-        res.status(201).send({newPost})
-        return
+        return res.status(201).send({newPost})
     }
-    if(!newPost) {
-        res.status(400).send({"errorsMessages": [
-            {
-                "message": "incorrect youtubeUrl",
-                "field": "name or youtubeUrl"
-            }
-        ]})
-        return
-    }
+    return res.status(400).send({"errorsMessages": [
+        {
+            "message": "incorrect youtubeUrl",
+            "field": "name or youtubeUrl"
+        }
+    ]})
 })
 
 const postGetIdPostValidation = param('id').isNumeric()
