@@ -27,7 +27,7 @@ exports.postRouter.post('/', titlePostValidation, shortDescriptionPostValidation
             }
         ] });
 });
-const postGetIdPostValidation = (0, express_validator_1.param)('id').isNumeric();
+const postGetIdPostValidation = (0, express_validator_1.param)('id').isLength({ min: 1, max: 50 }).isNumeric();
 exports.postRouter.get('/:id', postGetIdPostValidation, getPostMiddleware_1.getPostMiddleware, (req, res) => {
     const id = +req.params.id;
     const post = posts_repossitory_1.postsRepository.findPost(id);

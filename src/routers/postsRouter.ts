@@ -33,7 +33,7 @@ postRouter.post('/',
     ]})
 })
 
-const postGetIdPostValidation = param('id').isNumeric()
+const postGetIdPostValidation = param('id').isLength({min: 1, max: 50}).isNumeric()
 postRouter.get('/:id',
     postGetIdPostValidation,
     getPostMiddleware,
