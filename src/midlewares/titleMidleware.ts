@@ -3,11 +3,13 @@ import { body, validationResult } from 'express-validator';
 export const postsPostMiddleware = (req : Request, res : Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      const errors = validationResult(req);
+      console.log(errors)
       return res.status(400).json({ errors: {
         "errorsMessages": [
           {
             "message": "string",
-            "field": "string"
+            "field": errors.array()[0].param
           }
         ]
       }});
