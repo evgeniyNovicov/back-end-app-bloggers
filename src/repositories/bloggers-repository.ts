@@ -3,7 +3,7 @@ type bloggerType = {
     name : string,
     youtubeUrl : string
 }
-const bloggers : Array<bloggerType> = [
+export const bloggers : Array<bloggerType> = [
     {id: 0, name: "Parker", youtubeUrl: "https://www.youtube.com/"},
     {id: 1, name: "Smith", youtubeUrl: "https://www.youtube.com/"}
 ]

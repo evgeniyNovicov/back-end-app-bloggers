@@ -1,3 +1,5 @@
+import { bloggers } from "./bloggers-repository"
+
 const posts : Array<post> = [
     {id: 0, title: "фыафыафыфыа", shortDescription: "string", content: "string", bloggerId: 1, bloggerName: "string"},
     {id: 1, title: "фыasdsadыафыфыа", shortDescription: "string", content: "string", bloggerId: 2, bloggerName: "string"}
@@ -18,18 +20,19 @@ export const postsRepository = {
         shortDescription : string,
         content : string,
         bloggerId : number) {
-        if (title && shortDescription) {
-            const newPost = {
-                id: +(Date.now()),
-                title: title,
-                shortDescription: shortDescription,
-                content: content,
-                bloggerId: bloggerId,
-                bloggerName: "sadas"
+            const isBlogger = bloggers.findIndex((element) => element.id === bloggerId)
+            if(isBlogger + 1) {
+                const newPost = {
+                    id: +(Date.now()),
+                    title: title,
+                    shortDescription: shortDescription,
+                    content: content,
+                    bloggerId: bloggerId,
+                    bloggerName: "sadas"
+                }
+                posts.push(newPost)
+                return newPost
             }
-            posts.push(newPost)
-            return newPost
-        } else {
             return {
                 "errorsMessages": [
                   {
@@ -38,7 +41,6 @@ export const postsRepository = {
                   }
                 ]
             }
-        }
     },
     getAllPost() {
         return posts
