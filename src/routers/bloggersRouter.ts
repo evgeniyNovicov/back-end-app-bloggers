@@ -53,7 +53,7 @@ bloggerRouter.put('/:id',
     const id : number = +req.params.id
     const currentUpdateBlogger = blogerRepository.updateBlogger(id, req.body.name, req.body.youtubeUrl)
     if(currentUpdateBlogger) {
-        return res.status(200).send(currentUpdateBlogger)
+        return res.status(204).send(currentUpdateBlogger)
     }
     res.status(404).send('Not Found')
 })
