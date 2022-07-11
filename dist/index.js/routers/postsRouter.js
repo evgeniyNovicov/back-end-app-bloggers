@@ -9,7 +9,7 @@ const getPostMiddleware_1 = require("../midlewares/getPostMiddleware");
 exports.postRouter = (0, express_1.Router)({});
 exports.postRouter.get('/', (req, res) => {
     const allPost = posts_repossitory_1.postsRepository.getAllPost();
-    res.status(200).send({ allPost });
+    res.status(200).send(allPost);
 });
 const titlePostValidation = (0, express_validator_1.body)('title').trim().isLength({ min: 5, max: 10 }).withMessage('length title is incorrect');
 const shortDescriptionPostValidation = (0, express_validator_1.body)('shortDescription').trim().isLength({ min: 1, max: 100 }).withMessage('length shortDescription is not correct');

@@ -7,7 +7,7 @@ export const postRouter = Router({});
 
 postRouter.get('/', (req: Request, res: Response) => {
     const allPost = postsRepository.getAllPost()
-    res.status(200).send({ allPost})
+    res.status(200).send(allPost)
 })
 
 const titlePostValidation = body('title').trim().isLength({min: 5, max: 10}).withMessage('length title is incorrect');
