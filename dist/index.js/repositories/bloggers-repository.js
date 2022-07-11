@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.blogerRepository = exports.bloggers = void 0;
 exports.bloggers = [
-    { id: 0, name: "Parker", youtubeUrl: "https://www.youtube.com/" },
-    { id: 1, name: "Smith", youtubeUrl: "https://www.youtube.com/" }
+// {id: 0, name: "Parker", youtubeUrl: "https://www.youtube.com/"},
+// {id: 1, name: "Smith", youtubeUrl: "https://www.youtube.com/"}
 ];
 exports.blogerRepository = {
     getAllBlogger() {

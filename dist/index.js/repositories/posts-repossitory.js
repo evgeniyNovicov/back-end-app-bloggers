@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.postsRepository = void 0;
 const bloggers_repository_1 = require("./bloggers-repository");
 const posts = [
-    { id: 0, title: "фыафыафыфыа", shortDescription: "string", content: "string", bloggerId: 0, bloggerName: "string" },
-    { id: 1, title: "фыasdsadыафыфыа", shortDescription: "string", content: "string", bloggerId: 1, bloggerName: "string" }
+// {id: 0, title: "фыафыафыфыа", shortDescription: "string", content: "string", bloggerId: 0, bloggerName: "string"},
+// {id: 1, title: "фыasdsadыафыфыа", shortDescription: "string", content: "string", bloggerId: 1, bloggerName: "string"}
 ];
 exports.postsRepository = {
     addNewPost(title, shortDescription, content, bloggerId) {

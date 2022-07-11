@@ -4,8 +4,8 @@ type bloggerType = {
     youtubeUrl : string
 }
 export const bloggers : Array<bloggerType> = [
-    {id: 0, name: "Parker", youtubeUrl: "https://www.youtube.com/"},
-    {id: 1, name: "Smith", youtubeUrl: "https://www.youtube.com/"}
+    // {id: 0, name: "Parker", youtubeUrl: "https://www.youtube.com/"},
+    // {id: 1, name: "Smith", youtubeUrl: "https://www.youtube.com/"}
 ]
 
 export const blogerRepository = {

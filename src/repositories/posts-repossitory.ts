@@ -1,8 +1,8 @@
 import { bloggers } from "./bloggers-repository"
 
 const posts : Array<post> = [
-    {id: 0, title: "фыафыафыфыа", shortDescription: "string", content: "string", bloggerId: 0, bloggerName: "string"},
-    {id: 1, title: "фыasdsadыафыфыа", shortDescription: "string", content: "string", bloggerId: 1, bloggerName: "string"}
+    // {id: 0, title: "фыафыафыфыа", shortDescription: "string", content: "string", bloggerId: 0, bloggerName: "string"},
+    // {id: 1, title: "фыasdsadыафыфыа", shortDescription: "string", content: "string", bloggerId: 1, bloggerName: "string"}
 ]
 
 type post = {
