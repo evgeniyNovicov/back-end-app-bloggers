@@ -23,7 +23,7 @@ postRouter.post('/',
     (req: Request, res: Response) => {
     const newPost = postsRepository.addNewPost( req.body.title, req.body.shortDescription, req.body.content, req.body.bloggerId)
     if(newPost){
-        return res.status(201).send({newPost})
+        return res.status(201).send(newPost)
     }
     return res.status(400).send({"errorsMessages": [
         {

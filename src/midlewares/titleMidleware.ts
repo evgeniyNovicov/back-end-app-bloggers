@@ -4,15 +4,15 @@ export const postsPostMiddleware = (req : Request, res : Response, next: NextFun
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       const errors = validationResult(req);
-      console.log(errors)
-      return res.status(400).json({ errors: {
-        "errorsMessages": [
-          {
-            "message": "string",
-            "field": errors.array()[0].param
-          }
-        ]
-      }});
+      const errorResponse = {
+        errorsMessages: errors.array({onlyFirstError: true}).map((error) =>{
+              return {
+                message: error.msg,
+                field: error.param
+              }
+        })
+      }
+      return res.status(400).json(errorResponse);
     }
     next();
 }

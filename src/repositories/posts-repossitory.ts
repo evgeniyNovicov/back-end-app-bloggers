@@ -20,8 +20,8 @@ export const postsRepository = {
         shortDescription : string,
         content : string,
         bloggerId : number) {
-            const isBlogger = bloggers.findIndex((element) => element.id === bloggerId)
-            if(isBlogger + 1) {
+            const bloggerIndex = bloggers.findIndex((element) => element.id === bloggerId)
+            if(bloggerIndex !== -1) {
                 const newPost = {
                     id: +(Date.now()),
                     title: title,

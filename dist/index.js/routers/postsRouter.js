@@ -18,7 +18,7 @@ const bloggerIdPostValidation = (0, express_validator_1.body)('bloggerId').isLen
 exports.postRouter.post('/', titlePostValidation, shortDescriptionPostValidation, contentPostValidation, bloggerIdPostValidation, titleMidleware_1.postsPostMiddleware, (req, res) => {
     const newPost = posts_repossitory_1.postsRepository.addNewPost(req.body.title, req.body.shortDescription, req.body.content, req.body.bloggerId);
     if (newPost) {
-        return res.status(201).send({ newPost });
+        return res.status(201).send(newPost);
     }
     return res.status(400).send({ "errorsMessages": [
             {

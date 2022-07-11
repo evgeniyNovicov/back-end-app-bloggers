@@ -8,8 +8,8 @@ const posts = [
 ];
 exports.postsRepository = {
     addNewPost(title, shortDescription, content, bloggerId) {
-        const isBlogger = bloggers_repository_1.bloggers.findIndex((element) => element.id === bloggerId);
-        if (isBlogger + 1) {
+        const bloggerIndex = bloggers_repository_1.bloggers.findIndex((element) => element.id === bloggerId);
+        if (bloggerIndex !== -1) {
             const newPost = {
                 id: +(Date.now()),
                 title: title,
