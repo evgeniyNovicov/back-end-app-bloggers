@@ -20,7 +20,7 @@ exports.postRouter.post('/', titlePostValidation, shortDescriptionPostValidation
     if (newPost) {
         return res.status(201).send(newPost);
     }
-    return res.status(400).send({
+    return res.status(400).json({
         errorsMessages: [{
                 message: 'bloggerId invalid',
                 field: "bloggerId"
