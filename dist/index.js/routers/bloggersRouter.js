@@ -18,14 +18,14 @@ exports.bloggerRouter.post('/', postBloggerNameValidation, postBloggerYoutubeUrl
         res.status(201).send(newBlogger);
         return;
     }
-    res.status(400).send({
-        "errorsMessages": [
-            {
-                "message": "string",
-                "field": "string"
-            }
-        ]
-    });
+    // res.status(400).send({
+    //     "errorsMessages": [
+    //         {
+    //         "message": "string",
+    //         "field": "string"
+    //         }
+    //     ]
+    // })
 });
 const idBLoggerValidation = (0, express_validator_1.param)('id').isNumeric();
 exports.bloggerRouter.get('/:id', idBLoggerValidation, bloggersMiddleware_1.getBloggersMiddleware, (req, res) => {

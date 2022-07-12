@@ -22,14 +22,14 @@ bloggerRouter.post('/',
             res.status(201).send(newBlogger)
             return
         }
-        res.status(400).send({
-            "errorsMessages": [
-                {
-                "message": "string",
-                "field": "string"
-                }
-            ]
-        })
+        // res.status(400).send({
+        //     "errorsMessages": [
+        //         {
+        //         "message": "string",
+        //         "field": "string"
+        //         }
+        //     ]
+        // })
 })
 
 const idBLoggerValidation = param('id').isNumeric()
