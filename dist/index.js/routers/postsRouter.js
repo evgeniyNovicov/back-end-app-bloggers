@@ -11,7 +11,7 @@ exports.postRouter.get('/', (req, res) => {
     const allPost = posts_repossitory_1.postsRepository.getAllPost();
     res.status(200).send(allPost);
 });
-const titlePostValidation = (0, express_validator_1.body)('title').trim().isLength({ min: 5, max: 10 }).withMessage('length title is incorrect');
+const titlePostValidation = (0, express_validator_1.body)('title').trim().isLength({ min: 1, max: 30 }).withMessage('length title is incorrect');
 const shortDescriptionPostValidation = (0, express_validator_1.body)('shortDescription').trim().isLength({ min: 1, max: 100 }).withMessage('length shortDescription is not correct');
 const contentPostValidation = (0, express_validator_1.body)('content').trim().isLength({ min: 1, max: 1000 }).withMessage('length content is not correct');
 const bloggerIdPostValidation = (0, express_validator_1.body)('bloggerId').isLength({ min: 1, max: 1000 }).isNumeric().withMessage('bloggers id is not correct');

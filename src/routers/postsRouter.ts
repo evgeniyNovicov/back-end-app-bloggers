@@ -10,7 +10,7 @@ postRouter.get('/', (req: Request, res: Response) => {
     res.status(200).send(allPost)
 })
 
-const titlePostValidation = body('title').trim().isLength({min: 5, max: 10}).withMessage('length title is incorrect');
+const titlePostValidation = body('title').trim().isLength({min: 1, max: 30}).withMessage('length title is incorrect');
 const shortDescriptionPostValidation = body('shortDescription').trim().isLength({min: 1, max: 100}).withMessage('length shortDescription is not correct');
 const contentPostValidation = body('content').trim().isLength({min: 1, max: 1000}).withMessage('length content is not correct');
 const bloggerIdPostValidation = body('bloggerId').isLength({min: 1, max: 1000}).isNumeric().withMessage('bloggers id is not correct');
