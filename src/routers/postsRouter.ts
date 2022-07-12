@@ -25,12 +25,12 @@ postRouter.post('/',
     if(newPost){
         return res.status(201).send(newPost)
     }
-    return res.status(400).send({"errorsMessages": [
-        {
-            "message": "incorrect youtubeUrl",
-            "field": "name or youtubeUrl"
-        }
-    ]})
+    return res.status(400).send({
+        errorsMessages: [{
+            message: 'bloggerId invalid',
+            field: "bloggerId"
+        }]
+    })
 })
 
 const postGetIdPostValidation = param('id').isLength({min: 1, max: 50}).isNumeric()
