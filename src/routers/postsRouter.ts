@@ -57,7 +57,6 @@ postRouter.put('/:id',
     bloggerIdPostValidation,
     postGetIdPostValidation,
     postsPostMiddleware,
-    getPostMiddleware,
     (req: Request, res: Response) => {
         const updatePost = postsRepository.updatePost(+req.params.id, req.body.title, req.body.shortDescription, req.body.content, req.body.bloggerId)
         if(updatePost) {

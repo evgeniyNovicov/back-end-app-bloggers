@@ -40,7 +40,7 @@ exports.postRouter.get('/:id', postGetIdPostValidation, getPostMiddleware_1.getP
         return;
     }
 });
-exports.postRouter.put('/:id', titlePostValidation, shortDescriptionPostValidation, contentPostValidation, bloggerIdPostValidation, postGetIdPostValidation, titleMidleware_1.postsPostMiddleware, getPostMiddleware_1.getPostMiddleware, (req, res) => {
+exports.postRouter.put('/:id', titlePostValidation, shortDescriptionPostValidation, contentPostValidation, bloggerIdPostValidation, postGetIdPostValidation, titleMidleware_1.postsPostMiddleware, (req, res) => {
     const updatePost = posts_repossitory_1.postsRepository.updatePost(+req.params.id, req.body.title, req.body.shortDescription, req.body.content, req.body.bloggerId);
     if (updatePost) {
         res.status(204).send(updatePost);
