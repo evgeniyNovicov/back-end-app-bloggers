@@ -46,7 +46,7 @@ exports.postsRepository = {
     },
     deletePost(id) {
         const curentPostIndex = posts.findIndex((element) => element.id === id);
-        if (curentPostIndex + 1) {
+        if (curentPostIndex !== -1) {
             const deletePost = posts[curentPostIndex];
             posts.splice(curentPostIndex, 1);
             return deletePost;
