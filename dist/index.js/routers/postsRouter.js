@@ -46,7 +46,7 @@ exports.postRouter.put('/:id', titlePostValidation, shortDescriptionPostValidati
         res.status(204).send(updatePost);
         return;
     }
-    res.status(400).send({ errorsMessages: [{
+    res.status(404).send({ errorsMessages: [{
                 message: 'bloggerId invalid',
                 field: "bloggerId"
             }]
