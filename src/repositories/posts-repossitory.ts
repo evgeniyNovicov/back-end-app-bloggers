@@ -61,6 +61,9 @@ export const postsRepository = {
             curentUpdatePost.bloggerId = bloggerId
             return curentUpdatePost
         }
+        if (!curentBloggersId) {
+            return "not found blogger id"
+        }
         return false
     },
     deletePost(

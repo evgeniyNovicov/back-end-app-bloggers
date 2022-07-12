@@ -42,6 +42,14 @@ exports.postRouter.get('/:id', postGetIdPostValidation, getPostMiddleware_1.getP
 });
 exports.postRouter.put('/:id', titlePostValidation, shortDescriptionPostValidation, contentPostValidation, bloggerIdPostValidation, postGetIdPostValidation, titleMidleware_1.postsPostMiddleware, (req, res) => {
     const updatePost = posts_repossitory_1.postsRepository.updatePost(+req.params.id, req.body.title, req.body.shortDescription, req.body.content, +req.body.bloggerId);
+    if (updatePost === "not found blogger id") {
+        res.status(400).send({ errorsMessages: [{
+                    message: 'bloggerId invalid',
+                    field: "bloggerId"
+                }]
+        });
+        return;
+    }
     if (updatePost) {
         res.status(204).send(updatePost);
         return;

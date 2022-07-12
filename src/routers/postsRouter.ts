@@ -59,6 +59,13 @@ postRouter.put('/:id',
     postsPostMiddleware,
     (req: Request, res: Response) => {
         const updatePost = postsRepository.updatePost(+req.params.id, req.body.title, req.body.shortDescription, req.body.content, +req.body.bloggerId)
+        if(updatePost === "not found blogger id") {
+            res.status(400).send({ errorsMessages: [{
+                message: 'bloggerId invalid',
+                field: "bloggerId" }]
+            })
+            return
+        }
         if(updatePost) {
             res.status(204).send(updatePost)
             return
