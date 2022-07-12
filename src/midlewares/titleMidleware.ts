@@ -3,7 +3,6 @@ import { body, validationResult } from 'express-validator';
 export const postsPostMiddleware = (req : Request, res : Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const errors = validationResult(req);
       const errorResponse = {
         errorsMessages: errors.array({onlyFirstError: true}).map((error) =>{
               return {
