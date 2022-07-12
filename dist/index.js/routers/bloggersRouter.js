@@ -12,7 +12,7 @@ exports.bloggerRouter.get('/', (req, res) => {
 });
 const postBloggerNameValidation = (0, express_validator_1.body)('name').isString().trim().isLength({ min: 1, max: 15 });
 const postBloggerYoutubeUrlValidation = (0, express_validator_1.body)('youtubeUrl').isString().trim().isLength({ min: 1, max: 100 }).isURL();
-exports.bloggerRouter.post('/', postBloggerNameValidation, postBloggerYoutubeUrlValidation, bloggersMiddleware_1.getBloggersMiddleware, (req, res) => {
+exports.bloggerRouter.post('/', postBloggerYoutubeUrlValidation, postBloggerNameValidation, bloggersMiddleware_1.getBloggersMiddleware, (req, res) => {
     const newBlogger = bloggers_repository_1.blogerRepository.addNewBlogger(req.body.name, req.body.youtubeUrl);
     if (newBlogger) {
         res.status(201).send(newBlogger);

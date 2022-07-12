@@ -13,8 +13,8 @@ const postBloggerNameValidation = body('name').isString().trim().isLength({min: 
 const postBloggerYoutubeUrlValidation = body('youtubeUrl').isString().trim().isLength({min: 1, max: 100}).isURL()
 
 bloggerRouter.post('/',
-    postBloggerNameValidation,
     postBloggerYoutubeUrlValidation,
+    postBloggerNameValidation,
     getBloggersMiddleware,
     (req: Request, res: Response) => {
         const newBlogger = blogerRepository.addNewBlogger(req.body.name, req.body.youtubeUrl)
