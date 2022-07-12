@@ -58,7 +58,7 @@ postRouter.put('/:id',
     postGetIdPostValidation,
     postsPostMiddleware,
     (req: Request, res: Response) => {
-        const updatePost = postsRepository.updatePost(+req.params.id, req.body.title, req.body.shortDescription, req.body.content, req.body.bloggerId)
+        const updatePost = postsRepository.updatePost(+req.params.id, req.body.title, req.body.shortDescription, req.body.content, +req.body.bloggerId)
         if(updatePost) {
             res.status(204).send(updatePost)
             return
