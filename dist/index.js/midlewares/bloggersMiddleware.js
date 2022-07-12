@@ -5,14 +5,15 @@ const express_validator_1 = require("express-validator");
 const getBloggersMiddleware = (req, res, next) => {
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
-        return res.status(400).send({
-            "errorsMessages": [
-                {
-                    "message": "string",
-                    "field": "string"
-                }
-            ]
-        });
+        const errorResponse = {
+            errorsMessage: errors.array().map((error) => {
+                return {
+                    message: error.msg,
+                    field: error.param
+                };
+            })
+        };
+        return res.status(400).json(errorResponse);
     }
     next();
 };

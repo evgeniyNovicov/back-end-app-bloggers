@@ -3,14 +3,15 @@ import { validationResult } from 'express-validator';
 export const getBloggersMiddleware = (req : Request, res : Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).send({
-        "errorsMessages": [
-          {
-            "message": "string",
-            "field": "string"
+      const errorResponse = {
+        errorsMessage : errors.array().map((error) => {
+          return {
+            message: error.msg,
+            field: error.param
           }
-        ]
-      })
+        })
+      }
+      return res.status(400).json(errorResponse)
     }
     next();
 }
