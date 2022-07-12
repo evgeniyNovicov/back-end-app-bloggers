@@ -63,7 +63,7 @@ postRouter.put('/:id',
             res.status(204).send(updatePost)
             return
         }
-        res.status(404).send({ errorsMessages: [{
+        res.status(400).send({ errorsMessages: [{
             message: 'bloggerId invalid',
             field: "bloggerId" }]
         })
