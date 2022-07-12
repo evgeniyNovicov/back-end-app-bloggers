@@ -13,7 +13,7 @@ postRouter.get('/', (req: Request, res: Response) => {
 const titlePostValidation = body('title').trim().isLength({min: 1, max: 30}).withMessage('length title is incorrect');
 const shortDescriptionPostValidation = body('shortDescription').trim().isLength({min: 1, max: 100}).withMessage('length shortDescription is not correct');
 const contentPostValidation = body('content').trim().isLength({min: 1, max: 1000}).withMessage('length content is not correct');
-const bloggerIdPostValidation = body('bloggerId').trim().isLength({min: 1, max: 1000}).isNumeric().withMessage('bloggers id is not correct');
+const bloggerIdPostValidation = body('bloggerId').trim().isLength({min: 1, max: 10000000000000000}).isNumeric().withMessage('bloggers id is not correct');
 postRouter.post('/',
     titlePostValidation,
     shortDescriptionPostValidation,
@@ -21,7 +21,7 @@ postRouter.post('/',
     bloggerIdPostValidation,
     postsPostMiddleware,
     (req: Request, res: Response) => {
-    const newPost = postsRepository.addNewPost( req.body.title, req.body.shortDescription, req.body.content, req.body.bloggerId)
+    const newPost = postsRepository.addNewPost( req.body.title, req.body.shortDescription, req.body.content, +req.body.bloggerId)
     if(newPost){
         return res.status(201).send(newPost)
     }

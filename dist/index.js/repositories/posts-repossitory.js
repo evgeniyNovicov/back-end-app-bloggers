@@ -35,7 +35,8 @@ exports.postsRepository = {
     },
     updatePost(id, title, shortDescription, content, bloggerId) {
         const curentUpdatePost = posts.find((element) => element.id === id);
-        if (curentUpdatePost) {
+        const curentBloggersId = bloggers_repository_1.bloggers.find((element) => element.id === bloggerId);
+        if (curentUpdatePost && curentBloggersId) {
             curentUpdatePost.title = title;
             curentUpdatePost.shortDescription = shortDescription;
             curentUpdatePost.content = content;

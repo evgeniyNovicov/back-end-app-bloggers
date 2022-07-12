@@ -53,7 +53,8 @@ export const postsRepository = {
         bloggerId : number
     ) {
         const curentUpdatePost = posts.find((element) => element.id === id)
-        if(curentUpdatePost) {
+        const curentBloggersId = bloggers.find((element) => element.id === bloggerId)
+        if(curentUpdatePost && curentBloggersId) {
             curentUpdatePost.title = title
             curentUpdatePost.shortDescription = shortDescription
             curentUpdatePost.content = content

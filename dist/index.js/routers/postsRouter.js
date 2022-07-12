@@ -14,9 +14,9 @@ exports.postRouter.get('/', (req, res) => {
 const titlePostValidation = (0, express_validator_1.body)('title').trim().isLength({ min: 1, max: 30 }).withMessage('length title is incorrect');
 const shortDescriptionPostValidation = (0, express_validator_1.body)('shortDescription').trim().isLength({ min: 1, max: 100 }).withMessage('length shortDescription is not correct');
 const contentPostValidation = (0, express_validator_1.body)('content').trim().isLength({ min: 1, max: 1000 }).withMessage('length content is not correct');
-const bloggerIdPostValidation = (0, express_validator_1.body)('bloggerId').trim().isLength({ min: 1, max: 1000 }).isNumeric().withMessage('bloggers id is not correct');
+const bloggerIdPostValidation = (0, express_validator_1.body)('bloggerId').trim().isLength({ min: 1, max: 10000000000000000 }).isNumeric().withMessage('bloggers id is not correct');
 exports.postRouter.post('/', titlePostValidation, shortDescriptionPostValidation, contentPostValidation, bloggerIdPostValidation, titleMidleware_1.postsPostMiddleware, (req, res) => {
-    const newPost = posts_repossitory_1.postsRepository.addNewPost(req.body.title, req.body.shortDescription, req.body.content, req.body.bloggerId);
+    const newPost = posts_repossitory_1.postsRepository.addNewPost(req.body.title, req.body.shortDescription, req.body.content, +req.body.bloggerId);
     if (newPost) {
         return res.status(201).send(newPost);
     }
