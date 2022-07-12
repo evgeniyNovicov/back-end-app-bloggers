@@ -6,7 +6,7 @@ const getBloggersMiddleware = (req, res, next) => {
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
         const errorResponse = {
-            errorsMessage: errors.array({ onlyFirstError: true }).map((error) => {
+            errorsMessages: errors.array({ onlyFirstError: true }).map((error) => {
                 return {
                     message: error.msg,
                     field: error.param

@@ -4,7 +4,7 @@ export const getBloggersMiddleware = (req : Request, res : Response, next: NextF
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       const errorResponse = {
-        errorsMessage : errors.array({onlyFirstError: true}).map((error) => {
+        errorsMessages : errors.array({onlyFirstError: true}).map((error) => {
           return {
             message: error.msg,
             field: error.param
