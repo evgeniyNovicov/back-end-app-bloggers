@@ -3,6 +3,7 @@ import { body, param } from 'express-validator';
 import { postsPostMiddleware } from '../midlewares/titleMidleware';
 import { getPostMiddleware } from '../midlewares/getPostMiddleware';
 import { postsService } from '../domain/post-service';
+import { authMiddleware } from '../midlewares/authMiddleware';
 export const postRouter = Router({});
 
 postRouter.get('/', async (req: Request, res: Response) => {
@@ -16,6 +17,7 @@ const contentPostValidation = body('content').trim().isLength({min: 1, max: 1000
 const bloggerIdPostValidation = body('bloggerId').trim().isLength({min: 1, max: 10000000000000000}).isNumeric().withMessage('bloggers id is not correct');
 
 postRouter.post('/',
+    authMiddleware,
     titlePostValidation,
     shortDescriptionPostValidation,
     contentPostValidation,
@@ -36,6 +38,7 @@ postRouter.post('/',
 
 const postGetIdPostValidation = param('id').isLength({min: 1, max: 50}).isNumeric()
 postRouter.get('/:id',
+    authMiddleware,
     postGetIdPostValidation,
     getPostMiddleware,
     async (req: Request, res: Response) => {
@@ -50,6 +53,7 @@ postRouter.get('/:id',
 })
 
 postRouter.put('/:id',
+    authMiddleware,
     titlePostValidation,
     shortDescriptionPostValidation,
     contentPostValidation,
@@ -77,6 +81,7 @@ postRouter.put('/:id',
 
 const bloggerIdDeleteValidation = param('id').isNumeric();
 postRouter.delete('/:id',
+    authMiddleware,
     bloggerIdDeleteValidation,
     getPostMiddleware,
     async (req: Request, res: Response) => {
