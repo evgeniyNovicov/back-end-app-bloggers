@@ -7,7 +7,7 @@ import { authMiddleware } from '../midlewares/authMiddleware';
 export const postRouter = Router({});
 
 postRouter.get('/',
-    authMiddleware,
+    // authMiddleware,
     async (req: Request, res: Response) => {
     const allPost = await postsService.getAllPost()
     res.status(200).send(allPost)
@@ -24,7 +24,7 @@ postRouter.post('/',
     contentPostValidation,
     bloggerIdPostValidation,
     postsPostMiddleware,
-    authMiddleware,
+    // authMiddleware,
     async (req: Request, res: Response) => {
     const newPost = await postsService.addNewPost(req.body.title, req.body.shortDescription, req.body.content, +req.body.bloggerId)
     if(newPost){
@@ -42,7 +42,7 @@ const postGetIdPostValidation = param('id').isLength({min: 1, max: 50}).isNumeri
 postRouter.get('/:id',
     postGetIdPostValidation,
     getPostMiddleware,
-    authMiddleware,
+    // authMiddleware,
     async (req: Request, res: Response) => {
     const id = +req.params.id
     const post =  await postsService.findPost(id)
@@ -61,7 +61,7 @@ postRouter.put('/:id',
     bloggerIdPostValidation,
     postGetIdPostValidation,
     postsPostMiddleware,
-    authMiddleware,
+    // authMiddleware,
     async (req: Request, res: Response) => {
         const updatePost = await postsService.updatePost(+req.params.id, req.body.title, req.body.shortDescription, req.body.content, +req.body.bloggerId)
         if(updatePost === "not found blogger id") {
@@ -85,7 +85,7 @@ const bloggerIdDeleteValidation = param('id').isNumeric();
 postRouter.delete('/:id',
     bloggerIdDeleteValidation,
     getPostMiddleware,
-    authMiddleware,
+    // authMiddleware,
     async (req: Request, res: Response) => {
         const deletePost = await postsService.deletePost(+req.params.id)
         if(deletePost) {
