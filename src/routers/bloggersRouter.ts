@@ -7,7 +7,7 @@ import { blogerRepository } from '../repositories/bloggers-db-repository';
 
 export const bloggerRouter = Router({})
 bloggerRouter.get('/',
-    // authMiddleware,
+    authMiddleware,
     async (req: Request, res: Response) => {
     const bloggers = await bloggerService.getAllBlogger(req.body.title)
     res.status(200).send(bloggers)
