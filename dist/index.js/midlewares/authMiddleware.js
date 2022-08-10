@@ -4,7 +4,7 @@ exports.authMiddleware = void 0;
 const authMiddleware = (req, res, next) => {
     const autorization = req.headers.authorization;
     if (!autorization) {
-        res.status(400).json({ error: { message: 'No autorizated' } });
+        res.status(401).json({ error: { message: 'No autorizated' } });
         return;
     }
     const encoded = autorization.substring(6);
@@ -13,11 +13,11 @@ const authMiddleware = (req, res, next) => {
     const isValidLogin = login === 'admin' ? true : false;
     const isValidPassword = password === 'qwerty' ? true : false;
     if (!isValidLogin) {
-        res.status(400).json({ error: { message: 'login not found' } });
+        res.status(401).json({ error: { message: 'login not found' } });
         return;
     }
     if (!isValidPassword) {
-        res.status(400).json({ error: { message: 'Password not found' } });
+        res.status(401).json({ error: { message: 'Password not found' } });
         return;
     }
     if (isValidLogin && isValidPassword) {
