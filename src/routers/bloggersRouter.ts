@@ -7,7 +7,7 @@ import { blogerRepository } from '../repositories/bloggers-db-repository';
 
 export const bloggerRouter = Router({})
 bloggerRouter.get('/',
-    // authMiddleware,
+    authMiddleware,
     async (req: Request, res: Response) => {
     const bloggers = await bloggerService.getAllBlogger(req.body.title)
     res.status(200).send(bloggers)
@@ -20,7 +20,7 @@ bloggerRouter.post('/',
     postBloggerYoutubeUrlValidation,
     postBloggerNameValidation,
     getBloggersMiddleware,
-    // authMiddleware,
+    authMiddleware,
     async (req: Request, res: Response) => {
         const newBlogger = await bloggerService.addNewBlogger(req.body.name, req.body.youtubeUrl)
         if (newBlogger) {
@@ -33,7 +33,7 @@ const idBLoggerValidation = param('id').isNumeric()
 bloggerRouter.get('/:id',
     idBLoggerValidation,
     getBloggersMiddleware,
-    // authMiddleware,
+    authMiddleware,
     async (req: Request, res: Response) => {
     const id : number = +req.params.id
     const currentBlogger = await bloggerService.getBloggerId(id)
@@ -47,7 +47,7 @@ bloggerRouter.put('/:id',
     postBloggerNameValidation,
     postBloggerYoutubeUrlValidation,
     getBloggersMiddleware,
-    // authMiddleware,
+    authMiddleware,
     async (req: Request, res: Response) => {
     const id : number = +req.params.id
     const currentUpdateBlogger = await bloggerService.updateBlogger(id, req.body.name, req.body.youtubeUrl)
@@ -60,7 +60,7 @@ bloggerRouter.put('/:id',
 bloggerRouter.delete('/:id',
     idBLoggerValidation,
     getBloggersMiddleware,
-    // authMiddleware,
+    authMiddleware,
     async (req: Request, res: Response) => {
     const id : number = +req.params.id
     const deleteBlogger = await bloggerService.deleteBlogger(id)
