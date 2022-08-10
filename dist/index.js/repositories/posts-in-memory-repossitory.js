@@ -11,23 +11,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postsRepository = void 0;
 const bloggers_in_memory_repository_1 = require("./bloggers-in-memory-repository");
-const posts = [
-// {id: 0, title: "фыафыафыфыа", shortDescription: "string", content: "string", bloggerId: 0, bloggerName: "string"},
-// {id: 1, title: "фыasdsadыафыфыа", shortDescription: "string", content: "string", bloggerId: 1, bloggerName: "string"}
-];
+const posts = [];
 exports.postsRepository = {
-    addNewPost(title, shortDescription, content, bloggerId) {
+    addNewPost(newPost) {
         return __awaiter(this, void 0, void 0, function* () {
-            const bloggerIndex = bloggers_in_memory_repository_1.bloggers.findIndex((element) => element.id === bloggerId);
+            const bloggerIndex = bloggers_in_memory_repository_1.bloggers.findIndex((element) => element.id === newPost.bloggerId);
             if (bloggerIndex !== -1) {
-                const newPost = {
-                    id: +(Date.now()),
-                    title: title,
-                    shortDescription: shortDescription,
-                    content: content,
-                    bloggerId: bloggerId,
-                    bloggerName: "sadas"
-                };
                 posts.push(newPost);
                 return newPost;
             }
@@ -43,9 +32,9 @@ exports.postsRepository = {
         return __awaiter(this, void 0, void 0, function* () {
             const curentPost = posts.find((element) => element.id === id);
             if (curentPost) {
-                return true;
+                return curentPost;
             }
-            return false;
+            return null;
         });
     },
     updatePost(id, title, shortDescription, content, bloggerId) {
@@ -77,4 +66,4 @@ exports.postsRepository = {
         });
     }
 };
-//# sourceMappingURL=posts-repossitory.js.map
+//# sourceMappingURL=posts-in-memory-repossitory.js.map

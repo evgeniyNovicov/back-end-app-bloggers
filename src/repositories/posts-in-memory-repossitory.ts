@@ -1,9 +1,6 @@
-import { bloggers } from "./bloggers-repository"
+import { bloggers } from "./bloggers-in-memory-repository"
 
-const posts : Array<post> = [
-    // {id: 0, title: "фыафыафыфыа", shortDescription: "string", content: "string", bloggerId: 0, bloggerName: "string"},
-    // {id: 1, title: "фыasdsadыафыфыа", shortDescription: "string", content: "string", bloggerId: 1, bloggerName: "string"}
-]
+const posts : Array<post> = []
 
 type post = {
     id : number,
@@ -15,37 +12,25 @@ type post = {
 }
 
 export const postsRepository = {
-    addNewPost (
-        title : string,
-        shortDescription : string,
-        content : string,
-        bloggerId : number) {
-            const bloggerIndex = bloggers.findIndex((element) => element.id === bloggerId)
+    async addNewPost (newPost: post): Promise<post | null> {
+            const bloggerIndex = bloggers.findIndex((element) => element.id === newPost.bloggerId)
             if(bloggerIndex !== -1) {
-                const newPost = {
-                    id: +(Date.now()),
-                    title: title,
-                    shortDescription: shortDescription,
-                    content: content,
-                    bloggerId: bloggerId,
-                    bloggerName: "sadas"
-                }
                 posts.push(newPost)
                 return newPost
             }
-            return false
+            return null
     },
-    getAllPost() {
+    async getAllPost() {
         return posts
     },
-    findPost(id : number) {
+    async findPost(id : number) : Promise<post | null> {
         const curentPost = posts.find((element) => element.id === id)
         if(curentPost) {
             return curentPost
         }
-        return false
+        return null
     },
-    updatePost(
+    async updatePost(
         id: number,
         title : string,
         shortDescription : string,
@@ -66,7 +51,7 @@ export const postsRepository = {
         }
         return false
     },
-    deletePost(
+    async deletePost(
         id: number,
     ) {
         const curentPostIndex = posts.findIndex((element) => element.id === id)

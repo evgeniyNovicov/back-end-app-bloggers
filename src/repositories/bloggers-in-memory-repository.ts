@@ -1,30 +1,24 @@
-type bloggerType = {
+export type bloggerType = {
     id : number,
     name : string,
     youtubeUrl : string
 }
 export const bloggers : Array<bloggerType> = [
-    // {id: 0, name: "Parker", youtubeUrl: "https://www.youtube.com/"},
-    // {id: 1, name: "Smith", youtubeUrl: "https://www.youtube.com/"}
+    {id: 0, name: "Parker", youtubeUrl: "https://www.youtube.com/"},
+    {id: 1, name: "Smith", youtubeUrl: "https://www.youtube.com/"}
 ]
 
 export const blogerRepository = {
-    getAllBlogger () {
+    getAllBlogger (title : string | null) {
         return bloggers
     },
-    getBloggerId (id : number) {
+    getBloggerId (id : number | null) {
         const curentBlogger = bloggers.find((element) => element.id === id)
         return curentBlogger
     },
     addNewBlogger (
-        name : string,
-        youtubeUrl : string
+        newBlogger : bloggerType
     ) {
-        const newBlogger = {
-            id : +(Date.now()),
-            name : name,
-            youtubeUrl : youtubeUrl
-        }
         bloggers.push(newBlogger)
         return newBlogger
     },

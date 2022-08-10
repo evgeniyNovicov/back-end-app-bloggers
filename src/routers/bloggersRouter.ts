@@ -1,11 +1,12 @@
 import {Request, Response, Router} from 'express';
 import { body, param } from 'express-validator';
+import { bloggerService } from '../domain/blogger-service';
 import { getBloggersMiddleware } from '../midlewares/bloggersMiddleware';
-import { blogerRepository } from '../repositories/bloggers-repository';
+import { blogerRepository } from '../repositories/bloggers-db-repository';
 
 export const bloggerRouter = Router({})
-bloggerRouter.get('/', (req: Request, res: Response) => {
-    const bloggers = blogerRepository.getAllBlogger()
+bloggerRouter.get('/', async (req: Request, res: Response) => {
+    const bloggers = await bloggerService.getAllBlogger(req.body.title)
     res.status(200).send(bloggers)
 })
 
@@ -16,29 +17,21 @@ bloggerRouter.post('/',
     postBloggerYoutubeUrlValidation,
     postBloggerNameValidation,
     getBloggersMiddleware,
-    (req: Request, res: Response) => {
-        const newBlogger = blogerRepository.addNewBlogger(req.body.name, req.body.youtubeUrl)
+    async (req: Request, res: Response) => {
+        const newBlogger = await bloggerService.addNewBlogger(req.body.name, req.body.youtubeUrl)
         if (newBlogger) {
             res.status(201).send(newBlogger)
             return
         }
-        // res.status(400).send({
-        //     "errorsMessages": [
-        //         {
-        //         "message": "string",
-        //         "field": "string"
-        //         }
-        //     ]
-        // })
 })
 
 const idBLoggerValidation = param('id').isNumeric()
 bloggerRouter.get('/:id',
     idBLoggerValidation,
     getBloggersMiddleware,
-    (req: Request, res: Response) => {
+    async (req: Request, res: Response) => {
     const id : number = +req.params.id
-    const currentBlogger = blogerRepository.getBloggerId(id)
+    const currentBlogger = await bloggerService.getBloggerId(id)
     if (currentBlogger) {
         return res.status(200).send(currentBlogger)
     }
@@ -49,9 +42,9 @@ bloggerRouter.put('/:id',
     postBloggerNameValidation,
     postBloggerYoutubeUrlValidation,
     getBloggersMiddleware,
-    (req: Request, res: Response) => {
+    async (req: Request, res: Response) => {
     const id : number = +req.params.id
-    const currentUpdateBlogger = blogerRepository.updateBlogger(id, req.body.name, req.body.youtubeUrl)
+    const currentUpdateBlogger = await bloggerService.updateBlogger(id, req.body.name, req.body.youtubeUrl)
     if(currentUpdateBlogger) {
         return res.status(204).send(currentUpdateBlogger)
     }
@@ -61,9 +54,9 @@ bloggerRouter.put('/:id',
 bloggerRouter.delete('/:id',
     idBLoggerValidation,
     getBloggersMiddleware,
-    (req: Request, res: Response) => {
+    async (req: Request, res: Response) => {
     const id : number = +req.params.id
-    const deleteBlogger = blogerRepository.deleteBlogger(id)
+    const deleteBlogger = await bloggerService.deleteBlogger(id)
     if(deleteBlogger) {
         return res.status(204).send('No Content')
     }
