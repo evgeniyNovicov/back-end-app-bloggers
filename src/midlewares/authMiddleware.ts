@@ -2,7 +2,7 @@ import {NextFunction, Request, Response} from 'express';
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const autorization = req.headers.authorization;
     if(!autorization) {
-        res.status(400).json({error: {message: 'No autorizated'}})
+        res.status(401).json({error: {message: 'No autorizated'}})
         return
     }
     const encoded = autorization.substring(6)
@@ -11,11 +11,11 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     const isValidLogin = login === 'admin' ? true : false
     const isValidPassword = password === 'qwerty' ? true : false
     if(!isValidLogin) {
-        res.status(400).json({error: {message: 'login not found'}})
+        res.status(401).json({error: {message: 'login not found'}})
         return
     }
     if(!isValidPassword) {
-        res.status(400).json({error: {message: 'Password not found'}})
+        res.status(401).json({error: {message: 'Password not found'}})
         return
     }
     if(isValidLogin && isValidPassword) {
