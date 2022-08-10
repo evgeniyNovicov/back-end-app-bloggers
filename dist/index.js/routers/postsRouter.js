@@ -25,7 +25,7 @@ const titlePostValidation = (0, express_validator_1.body)('title').trim().isLeng
 const shortDescriptionPostValidation = (0, express_validator_1.body)('shortDescription').trim().isLength({ min: 1, max: 100 }).withMessage('length shortDescription is not correct');
 const contentPostValidation = (0, express_validator_1.body)('content').trim().isLength({ min: 1, max: 1000 }).withMessage('length content is not correct');
 const bloggerIdPostValidation = (0, express_validator_1.body)('bloggerId').trim().isLength({ min: 1, max: 10000000000000000 }).isNumeric().withMessage('bloggers id is not correct');
-exports.postRouter.post('/', authMiddleware_1.authMiddleware, titlePostValidation, shortDescriptionPostValidation, contentPostValidation, bloggerIdPostValidation, titleMidleware_1.postsPostMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.postRouter.post('/', titlePostValidation, shortDescriptionPostValidation, contentPostValidation, bloggerIdPostValidation, titleMidleware_1.postsPostMiddleware, authMiddleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const newPost = yield post_service_1.postsService.addNewPost(req.body.title, req.body.shortDescription, req.body.content, +req.body.bloggerId);
     if (newPost) {
         return res.status(201).send(newPost);
@@ -38,7 +38,7 @@ exports.postRouter.post('/', authMiddleware_1.authMiddleware, titlePostValidatio
     });
 }));
 const postGetIdPostValidation = (0, express_validator_1.param)('id').isLength({ min: 1, max: 50 }).isNumeric();
-exports.postRouter.get('/:id', authMiddleware_1.authMiddleware, postGetIdPostValidation, getPostMiddleware_1.getPostMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.postRouter.get('/:id', postGetIdPostValidation, getPostMiddleware_1.getPostMiddleware, authMiddleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = +req.params.id;
     const post = yield post_service_1.postsService.findPost(id);
     if (post) {
@@ -48,7 +48,7 @@ exports.postRouter.get('/:id', authMiddleware_1.authMiddleware, postGetIdPostVal
         return res.status(404).send("Not found");
     }
 }));
-exports.postRouter.put('/:id', authMiddleware_1.authMiddleware, titlePostValidation, shortDescriptionPostValidation, contentPostValidation, bloggerIdPostValidation, postGetIdPostValidation, titleMidleware_1.postsPostMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.postRouter.put('/:id', titlePostValidation, shortDescriptionPostValidation, contentPostValidation, bloggerIdPostValidation, postGetIdPostValidation, titleMidleware_1.postsPostMiddleware, authMiddleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const updatePost = yield post_service_1.postsService.updatePost(+req.params.id, req.body.title, req.body.shortDescription, req.body.content, +req.body.bloggerId);
     if (updatePost === "not found blogger id") {
         res.status(400).send({ errorsMessages: [{
@@ -69,7 +69,7 @@ exports.postRouter.put('/:id', authMiddleware_1.authMiddleware, titlePostValidat
     });
 }));
 const bloggerIdDeleteValidation = (0, express_validator_1.param)('id').isNumeric();
-exports.postRouter.delete('/:id', authMiddleware_1.authMiddleware, bloggerIdDeleteValidation, getPostMiddleware_1.getPostMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.postRouter.delete('/:id', bloggerIdDeleteValidation, getPostMiddleware_1.getPostMiddleware, authMiddleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const deletePost = yield post_service_1.postsService.deletePost(+req.params.id);
     if (deletePost) {
         return res.status(204).send();

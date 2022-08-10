@@ -17,12 +17,12 @@ const contentPostValidation = body('content').trim().isLength({min: 1, max: 1000
 const bloggerIdPostValidation = body('bloggerId').trim().isLength({min: 1, max: 10000000000000000}).isNumeric().withMessage('bloggers id is not correct');
 
 postRouter.post('/',
-    authMiddleware,
     titlePostValidation,
     shortDescriptionPostValidation,
     contentPostValidation,
     bloggerIdPostValidation,
     postsPostMiddleware,
+    authMiddleware,
     async (req: Request, res: Response) => {
     const newPost = await postsService.addNewPost(req.body.title, req.body.shortDescription, req.body.content, +req.body.bloggerId)
     if(newPost){
@@ -38,9 +38,9 @@ postRouter.post('/',
 
 const postGetIdPostValidation = param('id').isLength({min: 1, max: 50}).isNumeric()
 postRouter.get('/:id',
-    authMiddleware,
     postGetIdPostValidation,
     getPostMiddleware,
+    authMiddleware,
     async (req: Request, res: Response) => {
     const id = +req.params.id
     const post =  await postsService.findPost(id)
@@ -53,13 +53,13 @@ postRouter.get('/:id',
 })
 
 postRouter.put('/:id',
-    authMiddleware,
     titlePostValidation,
     shortDescriptionPostValidation,
     contentPostValidation,
     bloggerIdPostValidation,
     postGetIdPostValidation,
     postsPostMiddleware,
+    authMiddleware,
     async (req: Request, res: Response) => {
         const updatePost = await postsService.updatePost(+req.params.id, req.body.title, req.body.shortDescription, req.body.content, +req.body.bloggerId)
         if(updatePost === "not found blogger id") {
@@ -81,9 +81,9 @@ postRouter.put('/:id',
 
 const bloggerIdDeleteValidation = param('id').isNumeric();
 postRouter.delete('/:id',
-    authMiddleware,
     bloggerIdDeleteValidation,
     getPostMiddleware,
+    authMiddleware,
     async (req: Request, res: Response) => {
         const deletePost = await postsService.deletePost(+req.params.id)
         if(deletePost) {

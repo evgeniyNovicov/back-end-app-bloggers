@@ -13,6 +13,7 @@ exports.bloggerRouter = void 0;
 const express_1 = require("express");
 const express_validator_1 = require("express-validator");
 const blogger_service_1 = require("../domain/blogger-service");
+const authMiddleware_1 = require("../midlewares/authMiddleware");
 const bloggersMiddleware_1 = require("../midlewares/bloggersMiddleware");
 exports.bloggerRouter = (0, express_1.Router)({});
 exports.bloggerRouter.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -21,7 +22,7 @@ exports.bloggerRouter.get('/', (req, res) => __awaiter(void 0, void 0, void 0, f
 }));
 const postBloggerNameValidation = (0, express_validator_1.body)('name').isString().trim().isLength({ min: 1, max: 15 });
 const postBloggerYoutubeUrlValidation = (0, express_validator_1.body)('youtubeUrl').isString().trim().isLength({ min: 1, max: 100 }).isURL();
-exports.bloggerRouter.post('/', postBloggerYoutubeUrlValidation, postBloggerNameValidation, bloggersMiddleware_1.getBloggersMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.bloggerRouter.post('/', postBloggerYoutubeUrlValidation, postBloggerNameValidation, bloggersMiddleware_1.getBloggersMiddleware, authMiddleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const newBlogger = yield blogger_service_1.bloggerService.addNewBlogger(req.body.name, req.body.youtubeUrl);
     if (newBlogger) {
         res.status(201).send(newBlogger);
@@ -29,7 +30,7 @@ exports.bloggerRouter.post('/', postBloggerYoutubeUrlValidation, postBloggerName
     }
 }));
 const idBLoggerValidation = (0, express_validator_1.param)('id').isNumeric();
-exports.bloggerRouter.get('/:id', idBLoggerValidation, bloggersMiddleware_1.getBloggersMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.bloggerRouter.get('/:id', idBLoggerValidation, bloggersMiddleware_1.getBloggersMiddleware, authMiddleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = +req.params.id;
     const currentBlogger = yield blogger_service_1.bloggerService.getBloggerId(id);
     if (currentBlogger) {
@@ -37,7 +38,7 @@ exports.bloggerRouter.get('/:id', idBLoggerValidation, bloggersMiddleware_1.getB
     }
     res.status(404).send('Not found');
 }));
-exports.bloggerRouter.put('/:id', postBloggerNameValidation, postBloggerYoutubeUrlValidation, bloggersMiddleware_1.getBloggersMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.bloggerRouter.put('/:id', postBloggerNameValidation, postBloggerYoutubeUrlValidation, bloggersMiddleware_1.getBloggersMiddleware, authMiddleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = +req.params.id;
     const currentUpdateBlogger = yield blogger_service_1.bloggerService.updateBlogger(id, req.body.name, req.body.youtubeUrl);
     if (currentUpdateBlogger) {
@@ -45,7 +46,7 @@ exports.bloggerRouter.put('/:id', postBloggerNameValidation, postBloggerYoutubeU
     }
     res.status(404).send('Not Found');
 }));
-exports.bloggerRouter.delete('/:id', idBLoggerValidation, bloggersMiddleware_1.getBloggersMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.bloggerRouter.delete('/:id', idBLoggerValidation, bloggersMiddleware_1.getBloggersMiddleware, authMiddleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = +req.params.id;
     const deleteBlogger = yield blogger_service_1.bloggerService.deleteBlogger(id);
     if (deleteBlogger) {
