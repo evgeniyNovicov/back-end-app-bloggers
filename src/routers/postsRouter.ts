@@ -23,8 +23,8 @@ postRouter.post('/',
     shortDescriptionPostValidation,
     contentPostValidation,
     bloggerIdPostValidation,
-    postsPostMiddleware,
     authMiddleware,
+    postsPostMiddleware,
     async (req: Request, res: Response) => {
     const newPost = await postsService.addNewPost(req.body.title, req.body.shortDescription, req.body.content, +req.body.bloggerId)
     if(newPost){
@@ -60,8 +60,8 @@ postRouter.put('/:id',
     contentPostValidation,
     bloggerIdPostValidation,
     postGetIdPostValidation,
-    postsPostMiddleware,
     authMiddleware,
+    postsPostMiddleware,
     async (req: Request, res: Response) => {
         const updatePost = await postsService.updatePost(+req.params.id, req.body.title, req.body.shortDescription, req.body.content, +req.body.bloggerId)
         if(updatePost === "not found blogger id") {
@@ -84,8 +84,8 @@ postRouter.put('/:id',
 const bloggerIdDeleteValidation = param('id').isNumeric();
 postRouter.delete('/:id',
     bloggerIdDeleteValidation,
-    getPostMiddleware,
     authMiddleware,
+    getPostMiddleware,
     async (req: Request, res: Response) => {
         const deletePost = await postsService.deletePost(+req.params.id)
         if(deletePost) {

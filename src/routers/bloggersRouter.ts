@@ -19,8 +19,8 @@ const postBloggerYoutubeUrlValidation = body('youtubeUrl').isString().trim().isL
 bloggerRouter.post('/',
     postBloggerYoutubeUrlValidation,
     postBloggerNameValidation,
-    getBloggersMiddleware,
     authMiddleware,
+    getBloggersMiddleware,
     async (req: Request, res: Response) => {
         const newBlogger = await bloggerService.addNewBlogger(req.body.name, req.body.youtubeUrl)
         if (newBlogger) {
@@ -46,8 +46,8 @@ bloggerRouter.get('/:id',
 bloggerRouter.put('/:id',
     postBloggerNameValidation,
     postBloggerYoutubeUrlValidation,
-    getBloggersMiddleware,
     authMiddleware,
+    getBloggersMiddleware,
     async (req: Request, res: Response) => {
     const id : number = +req.params.id
     const currentUpdateBlogger = await bloggerService.updateBlogger(id, req.body.name, req.body.youtubeUrl)
@@ -59,8 +59,8 @@ bloggerRouter.put('/:id',
 
 bloggerRouter.delete('/:id',
     idBLoggerValidation,
-    getBloggersMiddleware,
     authMiddleware,
+    getBloggersMiddleware,
     async (req: Request, res: Response) => {
     const id : number = +req.params.id
     const deleteBlogger = await bloggerService.deleteBlogger(id)
