@@ -6,7 +6,9 @@ import { postsService } from '../domain/post-service';
 import { authMiddleware } from '../midlewares/authMiddleware';
 export const postRouter = Router({});
 
-postRouter.get('/', async (req: Request, res: Response) => {
+postRouter.get('/',
+    authMiddleware,
+    async (req: Request, res: Response) => {
     const allPost = await postsService.getAllPost()
     res.status(200).send(allPost)
 })

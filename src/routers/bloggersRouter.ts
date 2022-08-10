@@ -6,7 +6,9 @@ import { getBloggersMiddleware } from '../midlewares/bloggersMiddleware';
 import { blogerRepository } from '../repositories/bloggers-db-repository';
 
 export const bloggerRouter = Router({})
-bloggerRouter.get('/', async (req: Request, res: Response) => {
+bloggerRouter.get('/',
+    authMiddleware,
+    async (req: Request, res: Response) => {
     const bloggers = await bloggerService.getAllBlogger(req.body.title)
     res.status(200).send(bloggers)
 })

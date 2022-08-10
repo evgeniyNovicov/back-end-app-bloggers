@@ -16,7 +16,7 @@ const blogger_service_1 = require("../domain/blogger-service");
 const authMiddleware_1 = require("../midlewares/authMiddleware");
 const bloggersMiddleware_1 = require("../midlewares/bloggersMiddleware");
 exports.bloggerRouter = (0, express_1.Router)({});
-exports.bloggerRouter.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.bloggerRouter.get('/', authMiddleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const bloggers = yield blogger_service_1.bloggerService.getAllBlogger(req.body.title);
     res.status(200).send(bloggers);
 }));

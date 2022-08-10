@@ -17,7 +17,7 @@ const getPostMiddleware_1 = require("../midlewares/getPostMiddleware");
 const post_service_1 = require("../domain/post-service");
 const authMiddleware_1 = require("../midlewares/authMiddleware");
 exports.postRouter = (0, express_1.Router)({});
-exports.postRouter.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.postRouter.get('/', authMiddleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const allPost = yield post_service_1.postsService.getAllPost();
     res.status(200).send(allPost);
 }));

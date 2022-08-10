@@ -21,7 +21,7 @@ app.use('/bloggers', bloggerRouter)
 
 app.use('/posts', postRouter)
 const startApp = async () => {
-  await runDB()
+  // await runDB()
   app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
   })
