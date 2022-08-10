@@ -18,6 +18,7 @@ const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const bloggersRouter_1 = require("./routers/bloggersRouter");
 const postsRouter_1 = require("./routers/postsRouter");
+const authMiddleware_1 = require("./midlewares/authMiddleware");
 const db_1 = require("./repositories/db");
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3001;
@@ -29,7 +30,7 @@ exports.counter = 0;
 // app.use(autorizationMiddleware)
 app.use((0, body_parser_1.default)());
 app.use((0, cors_1.default)());
-// app.use(authMiddleware)
+app.use(authMiddleware_1.authMiddleware);
 app.use('/bloggers', bloggersRouter_1.bloggerRouter);
 app.use('/posts', postsRouter_1.postRouter);
 const startApp = () => __awaiter(void 0, void 0, void 0, function* () {

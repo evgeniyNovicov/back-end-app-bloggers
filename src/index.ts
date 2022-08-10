@@ -16,7 +16,7 @@ export let counter : number= 0
 // app.use(autorizationMiddleware)
 app.use(bodyParser())
 app.use(cors())
-// app.use(authMiddleware)
+app.use(authMiddleware)
 
 app.use('/bloggers', bloggerRouter)
 
